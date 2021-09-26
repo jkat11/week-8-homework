@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+      var yourVlSpec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 800,
+            "height": 500,
+            "title": "Main Australian Airports",
+            "projection": {"type": "equalEarth"},
+            "layer": [
+            {
+            "data": {
+            "url":
+           "https://raw.githubusercontent.com/jkat11/3179-repo/main/Australia.geo.json"
+           ,
+            "format": {"type": "topojson", "feature": "Australia.geo"}
+            },
+            "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+            },
+            {
+            "data": {
+            "url": "https://raw.githubusercontent.com/jkat11/3179-repo/main/Mainairports.csv"
+            },
+            "mark": {"type": "circle", "tooltip": {"content": ""}},
+            "encoding": {
+            "longitude": {"field": "Longitude", "type": "quantitative"},
+            "latitude": {"field": "Latitude", "type": "quantitative"}
+            }
+            }
+            ]
+      };
+      vegaEmbed('#vis', yourVlSpec);
+    </script>
+  </body>
+
+  </html>
